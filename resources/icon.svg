@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B6EF3"/>
+      <stop offset="100%" stop-color="#0A35B0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="128" height="128" rx="26" fill="url(#bg)"/>
+
+  <!-- Export arrow → pointing right (up-right diagonal shaft + filled head) -->
+  <!-- Shaft -->
+  <rect x="18" y="41" width="66" height="10" rx="5" fill="white"/>
+  <!-- Arrowhead -->
+  <polygon points="78,29 110,46 78,63" fill="white"/>
+
+  <!-- Import arrow ← pointing left (lower, slightly subdued) -->
+  <!-- Shaft -->
+  <rect x="44" y="77" width="66" height="10" rx="5" fill="white" opacity="0.7"/>
+  <!-- Arrowhead -->
+  <polygon points="50,65 18,82 50,99" fill="white" opacity="0.7"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <!-- Export arrow → (right, full) -->
+  <rect x="14" y="40" width="68" height="11" rx="5.5" fill="currentColor"/>
+  <polygon points="76,27 112,45.5 76,64" fill="currentColor"/>
+
+  <!-- Import arrow ← (left, subdued) -->
+  <rect x="46" y="77" width="68" height="11" rx="5.5" fill="currentColor" opacity="0.55"/>
+  <polygon points="52,64 16,82.5 52,101" fill="currentColor" opacity="0.55"/>
+</svg>
