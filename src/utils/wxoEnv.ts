@@ -18,11 +18,11 @@ function getWorkspaceRoot(): string {
 
 /**
  * Returns process env with PATH adjusted when orchestrate is in a Python venv.
- * If `wxo-toolkit-vsc.orchestrateVenvPath` is set, prepends venv/bin to PATH
+ * If `WxO-ToolBox-vsc.orchestrateVenvPath` is set, prepends venv/bin to PATH
  * so the orchestrate CLI is found. Use this for all orchestrate/script invocations.
  */
 export function getEffectiveEnv(): NodeJS.ProcessEnv {
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const venvPath = cfg.get<string>('orchestrateVenvPath')?.trim();
     if (!venvPath) return process.env;
 

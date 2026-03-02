@@ -12,8 +12,8 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 
-const SECRET_KEY_PREFIX = 'wxo-toolkit-vsc.apiKey.';
-const ENV_LIST_KEY = 'wxo-toolkit-vsc.envNames';
+const SECRET_KEY_PREFIX = 'WxO-ToolBox-vsc.apiKey.';
+const ENV_LIST_KEY = 'WxO-ToolBox-vsc.envNames';
 
 export class WxOCredentialsService {
     constructor(private readonly _secrets: vscode.SecretStorage) {}

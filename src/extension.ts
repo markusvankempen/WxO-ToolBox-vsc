@@ -1,5 +1,5 @@
 /**
- * WxO ToolBox (wxo-toolkit-vsc) — VS Code Extension
+ * WxO ToolBox (WxO-ToolBox-vsc) — VS Code Extension
  * Drives wxo-toolkit-cli scripts (export, import, compare, replicate).
  *
  * @author Markus van Kempen <markus.van.kempen@gmail.com>
@@ -34,10 +34,10 @@ export function activate(context: vscode.ExtensionContext) {
     const provider = new WxOImporterExporterViewProvider();
 
     // Show viewsWelcome immediately on first load (no env active yet)
-    vscode.commands.executeCommand('setContext', 'wxo-toolkit-vsc.noEnv', true);
+    vscode.commands.executeCommand('setContext', 'WxO-ToolBox-vsc.noEnv', true);
 
     // Use createTreeView so we can read .selection for multi-select keyboard delete
-    const treeView = vscode.window.createTreeView('wxo-toolkit-vsc-main', {
+    const treeView = vscode.window.createTreeView('WxO-ToolBox-vsc-main', {
         treeDataProvider: provider,
         canSelectMany: true,
     });
@@ -48,17 +48,17 @@ export function activate(context: vscode.ExtensionContext) {
         treeView,
 
         // ── Open panel ─────────────────────────────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.openPanel', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.openPanel', () => {
             WxOScriptsPanel.render(context.extensionUri);
         }),
 
         // ── Refresh view ───────────────────────────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.refreshView', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.refreshView', () => {
             provider.refresh();
         }),
 
         // ── Search resources (Quick Pick) ───────────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.searchResources', async () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.searchResources', async () => {
             if (!provider.activeEnvironment) {
                 vscode.window.showWarningMessage('Select an environment first.');
                 return;
@@ -87,11 +87,11 @@ export function activate(context: vscode.ExtensionContext) {
             if (!picked?.item) return;
             const { resourceType, name } = picked.item;
             const fakeItem = { contextValue: `wxo-resource-${resourceType}`, resourceName: name } as vscode.TreeItem;
-            await vscode.commands.executeCommand('wxo-toolkit-vsc.viewResourceJson', fakeItem);
+            await vscode.commands.executeCommand('WxO-ToolBox-vsc.viewResourceJson', fakeItem);
         }),
 
         // ── Filter tree ────────────────────────────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.filterResources', async () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.filterResources', async () => {
             const term = await vscode.window.showInputBox({
                 prompt: 'Filter resources by name',
                 placeHolder: 'e.g. weather, coingecko, get_global',
@@ -102,13 +102,13 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         // ── Clear tree filter ───────────────────────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.clearFilter', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.clearFilter', () => {
             provider.clearSearchFilter();
         }),
 
         // ── View resource JSON ─────────────────────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.viewResourceJson',
+            'WxO-ToolBox-vsc.viewResourceJson',
             async (item: vscode.TreeItem) => {
                 const info = extractItemInfo(item);
                 if (!info) {
@@ -147,7 +147,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Edit resource ──────────────────────────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.editResource',
+            'WxO-ToolBox-vsc.editResource',
             async (item: vscode.TreeItem) => {
                 const { resourceType, name } = extractItemInfo(item) ?? {};
                 if (!resourceType || !name) { return; }
@@ -189,7 +189,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Delete resource (supports multi-select + keyboard Delete key) ──────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.deleteResource',
+            'WxO-ToolBox-vsc.deleteResource',
             async (item?: vscode.TreeItem, nodes?: readonly vscode.TreeItem[]) => {
                 // Gather targets: context-menu multi-select → treeView.selection → single item
                 let candidates: readonly vscode.TreeItem[];
@@ -281,7 +281,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Compare resource ───────────────────────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.compareResource',
+            'WxO-ToolBox-vsc.compareResource',
             async (item: vscode.TreeItem) => {
                 const { resourceType, name } = extractItemInfo(item) ?? {};
                 if (!resourceType || !name) { return; }
@@ -342,15 +342,15 @@ export function activate(context: vscode.ExtensionContext) {
         ),
 
         // ── Show extension in marketplace panel ────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.showExtension', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.showExtension', () => {
             vscode.commands.executeCommand(
                 'workbench.extensions.action.showExtensionsWithIds',
-                ['markusvankempen.wxo-toolkit-vsc'],
+                ['markusvankempen.WxO-ToolBox-vsc'],
             );
         }),
 
         // ── Open user guide ───────────────────────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.openTraceDetail', async () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.openTraceDetail', async () => {
             const uri = await vscode.window.showOpenDialog({
                 canSelectMany: false,
                 openLabel: 'Open Trace',
@@ -360,7 +360,7 @@ export function activate(context: vscode.ExtensionContext) {
                 WxOTraceDetailPanel.show(context.extensionUri, uri[0].fsPath);
             }
         }),
-        vscode.commands.registerCommand('wxo-toolkit-vsc.openTraceDetailFromFile', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.openTraceDetailFromFile', async (item: unknown) => {
             const fsPath = item instanceof WxODirEntryItem ? item.fsPath : null;
             if (fsPath && fs.existsSync(fsPath)) {
                 WxOTraceDetailPanel.show(context.extensionUri, fsPath);
@@ -368,7 +368,7 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.window.showWarningMessage('WxO: File not found.');
             }
         }),
-        vscode.commands.registerCommand('wxo-toolkit-vsc.openUserGuide', async () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.openUserGuide', async () => {
             const guidePath = path.join(context.extensionPath, 'USER_GUIDE.md');
             if (!fs.existsSync(guidePath)) {
                 vscode.window.showWarningMessage('WxO: User guide not found.');
@@ -381,7 +381,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Copy resource to another environment ─────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.copyResource',
+            'WxO-ToolBox-vsc.copyResource',
             async (item: vscode.TreeItem) => {
                 const { resourceType, name } = extractItemInfo(item) ?? {};
                 if (!resourceType || !name) { return; }
@@ -539,7 +539,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Export single resource ─────────────────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.exportResource',
+            'WxO-ToolBox-vsc.exportResource',
             async (item: vscode.TreeItem) => {
                 const { resourceType, name } = extractItemInfo(item) ?? {};
                 if (!resourceType || !name) { return; }
@@ -582,7 +582,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Import tool from filesystem ───────────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.importToolFromFilesystem',
+            'WxO-ToolBox-vsc.importToolFromFilesystem',
             async () => {
                 if (!provider.activeEnvironment) {
                     vscode.window.showWarningMessage('WxO: Select an environment first.');
@@ -623,7 +623,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Create tool (opens WebView form) ───────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.createTool',
+            'WxO-ToolBox-vsc.createTool',
             () => {
                 if (!provider.activeEnvironment) {
                     vscode.window.showWarningMessage('WxO: Select an environment first for import.');
@@ -633,19 +633,19 @@ export function activate(context: vscode.ExtensionContext) {
         ),
 
         // ── Create Agent / Flow / Connection ──────────────────────────────────
-        vscode.commands.registerCommand('wxo-toolkit-vsc.createAgent', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.createAgent', () => {
             WxOObjectFormPanel.render(context.extensionUri, provider, 'agents');
         }),
-        vscode.commands.registerCommand('wxo-toolkit-vsc.createFlow', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.createFlow', () => {
             WxOObjectFormPanel.render(context.extensionUri, provider, 'flows');
         }),
-        vscode.commands.registerCommand('wxo-toolkit-vsc.createConnection', () => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.createConnection', () => {
             WxOObjectFormPanel.render(context.extensionUri, provider, 'connections');
         }),
 
         // ── Create plugin (Pre-invoke / Post-invoke) ────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.createPlugin',
+            'WxO-ToolBox-vsc.createPlugin',
             () => {
                 if (!provider.activeEnvironment) {
                     vscode.window.showWarningMessage('WxO: Select an environment first for import.');
@@ -656,7 +656,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Edit plugin (dedicated plugin editor panel) ────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.editPlugin',
+            'WxO-ToolBox-vsc.editPlugin',
             async (item: vscode.TreeItem) => {
                 const info = extractItemInfo(item);
                 if (!info || info.resourceType !== 'plugins') {
@@ -669,7 +669,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // ── Select environment ─────────────────────────────────────────────────
         vscode.commands.registerCommand(
-            'wxo-toolkit-vsc.selectEnvironment',
+            'WxO-ToolBox-vsc.selectEnvironment',
             async () => {
                 const envs = await vscode.window.withProgress(
                     {
@@ -728,7 +728,7 @@ export function activate(context: vscode.ExtensionContext) {
         // ── WxO Project Dir: file / folder commands ───────────────────────────
 
         /** Open a file from the WxO dir tree. Env-connection files → form editor; others → VS Code editor. */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.openDirFile', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.openDirFile', async (item: unknown) => {
             const fsPath = (item instanceof WxODirEntryItem) ? item.fsPath
                          : typeof item === 'string' ? item : null;
             if (!fsPath) { return; }
@@ -740,7 +740,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Reveal a file or folder in the OS file manager. */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.revealInExplorer', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.revealInExplorer', async (item: unknown) => {
             const fsPath = (item instanceof WxODirEntryItem || item instanceof WxODirRootItem)
                 ? (item instanceof WxODirEntryItem ? item.fsPath : item.wxoRoot)
                 : null;
@@ -749,7 +749,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Copy the file / folder path to clipboard. */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.copyFilePath', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.copyFilePath', async (item: unknown) => {
             const fsPath = (item instanceof WxODirEntryItem) ? item.fsPath
                          : (item instanceof WxODirRootItem) ? item.wxoRoot : null;
             if (!fsPath) { return; }
@@ -758,7 +758,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Create a new file inside a folder (or WxO root). */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.newDirFile', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.newDirFile', async (item: unknown) => {
             const dirPath = (item instanceof WxODirEntryItem && !item.isFile) ? item.fsPath
                           : (item instanceof WxODirRootItem) ? item.wxoRoot : null;
             if (!dirPath) { vscode.window.showWarningMessage('WxO: Select a folder first.'); return; }
@@ -775,7 +775,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Create a new subfolder. */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.newDirFolder', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.newDirFolder', async (item: unknown) => {
             const dirPath = (item instanceof WxODirEntryItem && !item.isFile) ? item.fsPath
                           : (item instanceof WxODirRootItem) ? item.wxoRoot : null;
             if (!dirPath) { vscode.window.showWarningMessage('WxO: Select a folder first.'); return; }
@@ -791,7 +791,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Rename a file or folder. */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.renameDirItem', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.renameDirItem', async (item: unknown) => {
             if (!(item instanceof WxODirEntryItem)) { return; }
             const oldPath = item.fsPath;
             const oldName = path.basename(oldPath);
@@ -808,7 +808,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Delete a file or folder (with confirmation). */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.deleteDirItem', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.deleteDirItem', async (item: unknown) => {
             if (!(item instanceof WxODirEntryItem)) { return; }
             const fsPath = item.fsPath;
             const label = path.basename(fsPath);
@@ -827,7 +827,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         /** Open WxO root folder in a new terminal. */
-        vscode.commands.registerCommand('wxo-toolkit-vsc.openDirInTerminal', async (item: unknown) => {
+        vscode.commands.registerCommand('WxO-ToolBox-vsc.openDirInTerminal', async (item: unknown) => {
             const dirPath = (item instanceof WxODirEntryItem && !item.isFile) ? item.fsPath
                           : (item instanceof WxODirRootItem) ? item.wxoRoot : null;
             if (!dirPath) { return; }
@@ -877,7 +877,7 @@ function getScriptsDirForCopy(extensionPath?: string): string | null {
         const bundled = path.join(extensionPath, 'scripts');
         if (fs.existsSync(path.join(bundled, 'import_to_wxo.sh'))) return bundled;
     }
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('scriptsPath')?.trim();
     if (custom) {
         const p = path.isAbsolute(custom) ? custom : path.join(getWorkspaceRoot(), custom);
@@ -894,7 +894,7 @@ function getScriptsDirForCopy(extensionPath?: string): string | null {
 
 /** Root folder for WxO Exports, Imports, Systems. From config or default WxO/. */
 function getWxORoot(): string {
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('wxoRoot')?.trim();
     if (custom) {
         return path.isAbsolute(custom) ? custom : path.join(getWorkspaceRoot(), custom);

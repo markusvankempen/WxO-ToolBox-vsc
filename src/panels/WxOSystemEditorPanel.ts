@@ -16,7 +16,7 @@ import { getCredentialsService } from '../services/credentialsContext.js';
 import { WxOSystemsConfigService } from '../services/WxOSystemsConfigService.js';
 
 function getWxORoot(): string {
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('wxoRoot')?.trim();
     const ws = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? process.cwd();
     if (custom) {

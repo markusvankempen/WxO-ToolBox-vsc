@@ -1,10 +1,10 @@
-# WxO ToolBox — VS Code Extension (wxo-toolkit-vsc)
+# WxO ToolBox — VS Code Extension (WxO-ToolBox-vsc)
 
 **IBM Watsonx Orchestrate**
 
 *Author: Markus van Kempen · 28 Feb 2026*
 
-**Repository:** [github.com/markusvankempen/wxo-toolkit-vsc](https://github.com/markusvankempen/wxo-toolkit-vsc)
+**Repository:** [github.com/markusvankempen/WxO-ToolBox-vsc](https://github.com/markusvankempen/WxO-ToolBox-vsc)
 
 Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, and connections via the orchestrate CLI from VS Code. Uses the [**WxO-Importer-Export-Comparer-Validator**](https://github.com/markusvankempen/WxO-Importer-Export-Comparer-Validator) CLI scripts (wxo-toolkit-cli) bundled with the extension. Standalone extension (independent of wxo-builder).
 
@@ -55,8 +55,8 @@ Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, 
 
 ```bash
 # Clone the repo (or use existing checkout)
-git clone https://github.com/markusvankempen/wxo-toolkit-vsc.git
-cd wxo-toolkit-vsc
+git clone https://github.com/markusvankempen/WxO-ToolBox-vsc.git
+cd WxO-ToolBox-vsc
 
 npm install
 npm run compile
@@ -69,11 +69,11 @@ Then in VS Code: **Run and Debug** → **Run Extension** (F5).
 ## Package for publishing
 
 ```bash
-cd wxo-toolkit-vsc   # or watsonx-orchestrate-devkit/packages/wxo-toolkit/vscode-extension
+cd WxO-ToolBox-vsc   # or watsonx-orchestrate-devkit/packages/wxo-toolkit/vscode-extension
 npm run package
 ```
 
-Produces `wxo-toolkit-vsc-1.2.4.vsix` (version from package.json). Install via **Extensions** → "..." → **Install from VSIX**.
+Produces `WxO-ToolBox-vsc-1.2.4.vsix` (version from package.json). Install via **Extensions** → "..." → **Install from VSIX**.
 
 See `PUBLISHING.md` for publishing to VS Code Marketplace and Open VSX.
 
@@ -111,7 +111,7 @@ The extension prepends `venv/bin` to `PATH` for all CLI operations. If you don't
 
 | Setting | Description |
 |---------|-------------|
-| `wxo-toolkit-vsc.scriptsPath` | Path to wxo-toolkit-cli scripts folder. Leave empty to use bundled scripts. |
-| `wxo-toolkit-vsc.wxoRoot` | WxO Project Dir (default: `{workspaceRoot}/WxO`) |
-| `wxo-toolkit-vsc.orchestrateVenvPath` | Path to Python venv where orchestrate CLI is installed (e.g. `.venv`). **Required when orchestrate is in a venv** — see above. |
-| `wxo-toolkit-vsc.debugPanel` | Write panel HTML to `.vscode/wxo-panel-debug.html` for debugging |
+| `WxO-ToolBox-vsc.scriptsPath` | Path to wxo-toolkit-cli scripts folder. Leave empty to use bundled scripts. |
+| `WxO-ToolBox-vsc.wxoRoot` | WxO Project Dir (default: `{workspaceRoot}/WxO`) |
+| `WxO-ToolBox-vsc.orchestrateVenvPath` | Path to Python venv where orchestrate CLI is installed (e.g. `.venv`). **Required when orchestrate is in a venv** — see above. |
+| `WxO-ToolBox-vsc.debugPanel` | Write panel HTML to `.vscode/wxo-panel-debug.html` for debugging |

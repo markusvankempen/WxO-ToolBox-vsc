@@ -1,6 +1,6 @@
 # WxO ToolBox — User Guide
 
-**VS Code Extension** (wxo-toolkit-vsc) · IBM Watsonx Orchestrate
+**VS Code Extension** (WxO-ToolBox-vsc) · IBM Watsonx Orchestrate
 
 *Author: Markus van Kempen · 28 Feb 2026*
 
@@ -69,7 +69,7 @@ See [SETUP.md](SETUP.md) for flow diagrams and a detailed setup guide.
 
 ## Getting Started
 
-1. **Open your workspace** — Open any folder. The extension bundles the wxo-toolkit-cli scripts. Or set `wxo-toolkit-vsc.scriptsPath` to a custom scripts folder.
+1. **Open your workspace** — Open any folder. The extension bundles the wxo-toolkit-cli scripts. Or set `WxO-ToolBox-vsc.scriptsPath` to a custom scripts folder.
 
 2. **Select an environment** — In the Activity Bar, click the **WxO ToolBox** icon (↔), then click **Select Environment** or the environment dropdown to choose a Watson Orchestrate instance (TZ1, TZ2, etc.).
 
@@ -96,7 +96,7 @@ The **WxO ToolBox** section in the Activity Bar shows:
 | **Connections** | Connections; inline Create; Edit opens form with auth options |
 | **Plugins** | Agent plugins (pre/post-invoke); Edit opens plugin form |
 | **WxO Project Dir** | Tree of Exports, Replicate, Compare, Systems; right-click for New File/Folder, Rename, Delete, Reveal, Copy Path, Open in Terminal |
-| **Extension: WxO ToolBox** | Opens this extension (wxo-toolkit-vsc) in the Extensions panel |
+| **Extension: WxO ToolBox** | Opens this extension (WxO-ToolBox-vsc) in the Extensions panel |
 
 **Multi-select** — Shift-click or Ctrl/Cmd-click to select multiple resources; press **Delete** to remove all selected.
 
@@ -245,10 +245,10 @@ Configure the extension in **File → Preferences → Settings** (search for "Wx
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| `wxo-toolkit-vsc.scriptsPath` | Path to wxo-toolkit-cli scripts folder. Leave empty for bundled scripts. | (empty = bundled) |
-| `wxo-toolkit-vsc.wxoRoot` | WxO Project Dir: root for Exports, Imports, Compare, Systems | `{workspaceRoot}/WxO` |
-| `wxo-toolkit-vsc.orchestrateVenvPath` | Path to Python venv where orchestrate CLI is installed (e.g. `.venv`). Prepend venv/bin to PATH for all CLI calls. | (empty) |
-| `wxo-toolkit-vsc.debugPanel` | Write panel HTML to `.vscode/wxo-panel-debug.html` for browser debugging | `false` |
+| `WxO-ToolBox-vsc.scriptsPath` | Path to wxo-toolkit-cli scripts folder. Leave empty for bundled scripts. | (empty = bundled) |
+| `WxO-ToolBox-vsc.wxoRoot` | WxO Project Dir: root for Exports, Imports, Compare, Systems | `{workspaceRoot}/WxO` |
+| `WxO-ToolBox-vsc.orchestrateVenvPath` | Path to Python venv where orchestrate CLI is installed (e.g. `.venv`). Prepend venv/bin to PATH for all CLI calls. | (empty) |
+| `WxO-ToolBox-vsc.debugPanel` | Write panel HTML to `.vscode/wxo-panel-debug.html` for browser debugging | `false` |
 
 ---
 
@@ -257,7 +257,7 @@ Configure the extension in **File → Preferences → Settings** (search for "Wx
 ### "Scripts not found"
 
 - Open a workspace that contains the wxo-toolkit-cli folder
-- Or set `wxo-toolkit-vsc.scriptsPath` to the correct path
+- Or set `WxO-ToolBox-vsc.scriptsPath` to the correct path
 
 ### "No active environment"
 
@@ -267,7 +267,7 @@ Configure the extension in **File → Preferences → Settings** (search for "Wx
 ### Export/Import commands fail
 
 - Check the terminal output for errors
-- If orchestrate is in a Python venv, set `wxo-toolkit-vsc.orchestrateVenvPath` to the venv folder (e.g. `.venv`)
+- If orchestrate is in a Python venv, set `WxO-ToolBox-vsc.orchestrateVenvPath` to the venv folder (e.g. `.venv`)
 - Otherwise, ensure the orchestrate CLI is in your PATH (or use the full path in settings)
 - For import, add the environment with API key in the **Systems** tab, or add `WXO_API_KEY_{ENV}` to `.env`
 
@@ -285,7 +285,7 @@ Configure the extension in **File → Preferences → Settings** (search for "Wx
 
 ### Panel freezes or JavaScript error
 
-1. Enable debug mode: **Settings** → search `wxo-toolkit-vsc.debugPanel` → check it
+1. Enable debug mode: **Settings** → search `WxO-ToolBox-vsc.debugPanel` → check it
 2. Open the panel again (e.g. via Activity Bar → Open Panel)
 3. The extension writes `.vscode/wxo-panel-debug.html` in your workspace and logs to the **Output** channel (View → Output → select "WxO ToolBox")
 4. Open `.vscode/wxo-panel-debug.html` in Chrome or Edge, press **F12** → **Console** tab to see the exact error and line number
@@ -321,4 +321,4 @@ Right-click on folders or files:
 - **Full CLI User Guide** — `../USER_GUIDE.md` (interactive shell scripts)
 - **IBM Watson Orchestrate** — [developer.watson-orchestrate.ibm.com](https://developer.watson-orchestrate.ibm.com)
 - **Install orchestrate CLI** — [Getting Started](https://developer.watson-orchestrate.ibm.com/getting_started/installing)
-- **Issues** — [GitHub Issues](https://github.com/markusvankempen/wxo-toolkit-vsc/issues)
+- **Issues** — [GitHub Issues](https://github.com/markusvankempen/WxO-ToolBox-vsc/issues)

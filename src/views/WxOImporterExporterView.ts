@@ -65,7 +65,7 @@ class EnvSelectorItem extends vscode.TreeItem {
             ? `Active environment: ${envName}. Click to switch.`
             : 'No environment selected. Click to choose one.';
         this.command = {
-            command: 'wxo-toolkit-vsc.selectEnvironment',
+            command: 'WxO-ToolBox-vsc.selectEnvironment',
             title: 'Select Environment',
         };
         this.contextValue = 'wxo-env-selector';
@@ -193,7 +193,7 @@ class OpenPanelItem extends vscode.TreeItem {
         super('Open Panel', vscode.TreeItemCollapsibleState.None);
         this.iconPath = new vscode.ThemeIcon('window');
         this.command = {
-            command: 'wxo-toolkit-vsc.openPanel',
+            command: 'WxO-ToolBox-vsc.openPanel',
             title: 'Open WxO ToolBox Panel',
         };
         this.tooltip = 'Open the Export / Import / Compare / Replicate panel';
@@ -208,7 +208,7 @@ class ImportToolItem extends vscode.TreeItem {
         this.iconPath = new vscode.ThemeIcon('file-directory');
         this.description = 'from filesystem';
         this.command = {
-            command: 'wxo-toolkit-vsc.importToolFromFilesystem',
+            command: 'WxO-ToolBox-vsc.importToolFromFilesystem',
             title: 'Import Tool from Folder',
         };
         this.tooltip = 'Pick a tool folder (Python, OpenAPI, or Flow) and import into the active environment';
@@ -223,7 +223,7 @@ class CreateToolItem extends vscode.TreeItem {
         this.iconPath = new vscode.ThemeIcon('add');
         this.description = 'form';
         this.command = {
-            command: 'wxo-toolkit-vsc.createTool',
+            command: 'WxO-ToolBox-vsc.createTool',
             title: 'Open Create Tool Form',
         };
         this.tooltip = 'Open Create Tool form — Python or OpenAPI with Load from filesystem, Form/JSON edit';
@@ -238,7 +238,7 @@ class CreatePluginItem extends vscode.TreeItem {
         this.iconPath = new vscode.ThemeIcon('add');
         this.description = 'form';
         this.command = {
-            command: 'wxo-toolkit-vsc.createPlugin',
+            command: 'WxO-ToolBox-vsc.createPlugin',
             title: 'Open Create Plugin Form',
         };
         this.tooltip = 'Open Create Plugin form — Pre-invoke or Post-invoke with templates';
@@ -253,7 +253,7 @@ class ExtensionLinkItem extends vscode.TreeItem {
         this.iconPath = new vscode.ThemeIcon('extensions');
         this.tooltip = 'View this extension in the VS Code Extensions panel';
         this.command = {
-            command: 'wxo-toolkit-vsc.showExtension',
+            command: 'WxO-ToolBox-vsc.showExtension',
             title: 'Show Extension',
         };
         this.contextValue = 'wxo-ext-link';
@@ -301,7 +301,7 @@ export class WxODirEntryItem extends vscode.TreeItem {
         }
 
         if (isFile) {
-            this.command = { command: 'wxo-toolkit-vsc.openDirFile', title: 'Open', arguments: [this] };
+            this.command = { command: 'WxO-ToolBox-vsc.openDirFile', title: 'Open', arguments: [this] };
         }
     }
 }
@@ -365,13 +365,13 @@ export class WxOImporterExporterViewProvider
 
     setSearchFilter(term: string): void {
         this._searchFilter = (term ?? '').trim().toLowerCase();
-        vscode.commands.executeCommand('setContext', 'wxo-toolkit-vsc.hasFilter', !!this._searchFilter);
+        vscode.commands.executeCommand('setContext', 'WxO-ToolBox-vsc.hasFilter', !!this._searchFilter);
         this.refresh();
     }
 
     clearSearchFilter(): void {
         this._searchFilter = '';
-        vscode.commands.executeCommand('setContext', 'wxo-toolkit-vsc.hasFilter', false);
+        vscode.commands.executeCommand('setContext', 'WxO-ToolBox-vsc.hasFilter', false);
         this.refresh();
     }
 
@@ -380,7 +380,7 @@ export class WxOImporterExporterViewProvider
         // Drive viewsWelcome: show when no env is active
         vscode.commands.executeCommand(
             'setContext',
-            'wxo-toolkit-vsc.noEnv',
+            'WxO-ToolBox-vsc.noEnv',
             !envName,
         );
         this.refresh();

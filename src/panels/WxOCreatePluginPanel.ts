@@ -24,7 +24,7 @@ function getWorkspaceRoot(): string {
 }
 
 function getWxORoot(): string {
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('wxoRoot')?.trim();
     const ws = getWorkspaceRoot();
     if (custom) {
@@ -207,7 +207,7 @@ export class WxOCreatePluginPanel {
             command: 'status',
             message: `Plugin "${name}" created at ${pluginDir}. Import running in terminal.`,
         });
-        vscode.commands.executeCommand('wxo-toolkit-vsc.refreshView');
+        vscode.commands.executeCommand('WxO-ToolBox-vsc.refreshView');
     }
 
     private async _handleOpenInEditor(content?: Record<string, unknown>): Promise<void> {

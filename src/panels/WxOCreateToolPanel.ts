@@ -23,7 +23,7 @@ function getWorkspaceRoot(): string {
 }
 
 function getWxORoot(): string {
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('wxoRoot')?.trim();
     const ws = getWorkspaceRoot();
     if (custom) {
@@ -73,7 +73,7 @@ export class WxOCreateToolPanel {
             });
         }
 
-        const debugPanel = vscode.workspace.getConfiguration('wxo-toolkit-vsc').get<boolean>('debugPanel');
+        const debugPanel = vscode.workspace.getConfiguration('WxO-ToolBox-vsc').get<boolean>('debugPanel');
         if (debugPanel) {
             try {
                 const ws = getWorkspaceRoot();
@@ -628,7 +628,7 @@ ${paramLines}
         await this._runInTerminal(lines.join('\n'), `WxO Create: ${name}`, env);
         this._panel.webview.postMessage({ command: 'status', message: `Python tool "${name}" created at ${toolDir}. Import running in terminal.` });
         await vscode.workspace.openTextDocument(path.join(toolDir, pyFile));
-        vscode.commands.executeCommand('wxo-toolkit-vsc.refreshView');
+        vscode.commands.executeCommand('WxO-ToolBox-vsc.refreshView');
     }
 
     private async _handleCreateOpenApiTool(content?: Record<string, unknown>) {
@@ -766,12 +766,12 @@ ${paramLines}
 
         await this._runInTerminal(lines.join('\n'), `WxO Create: ${name}`, env);
         this._panel.webview.postMessage({ command: 'status', message: `OpenAPI tool "${name}" created at ${toolDir}. Import running in terminal.` });
-        vscode.commands.executeCommand('wxo-toolkit-vsc.refreshView');
+        vscode.commands.executeCommand('WxO-ToolBox-vsc.refreshView');
     }
 
     private _getHtml(): string {
         const activeEnv = this._provider.activeEnvironment || 'TZ1';
-        const _debug = vscode.workspace.getConfiguration('wxo-toolkit-vsc').get<boolean>('debugPanel') === true;
+        const _debug = vscode.workspace.getConfiguration('WxO-ToolBox-vsc').get<boolean>('debugPanel') === true;
         const editMode = this._editMode;
         const headerTitle = editMode ? 'Edit Tool' : 'Create Tool';
         const mainButtonText = editMode ? 'Update & Re-import' : 'Create & Import';

@@ -35,7 +35,7 @@ function getScriptsDir(extensionPath?: string): string | null {
         const bundled = path.join(extensionPath, 'scripts');
         if (fs.existsSync(path.join(bundled, 'wxo_exporter_importer.sh'))) return bundled;
     }
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('scriptsPath')?.trim();
     if (custom) {
         const p = path.isAbsolute(custom) ? custom : path.join(getWorkspaceRoot(), custom);
@@ -149,7 +149,7 @@ function capitalize(s: string): string {
 
 /** Root folder for WxO Exports, Imports, Systems. From config or default WxO/. */
 function getWxORoot(): string {
-    const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+    const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
     const custom = cfg.get<string>('wxoRoot')?.trim();
     if (custom) {
         return path.isAbsolute(custom) ? custom : path.join(getWorkspaceRoot(), custom);
@@ -253,10 +253,10 @@ export class WxOScriptsPanel {
                     } else if (msg.command === 'openExtension') {
                         await vscode.commands.executeCommand(
                             'workbench.extensions.action.showExtensionsWithIds',
-                            ['markusvankempen.wxo-toolkit-vsc'],
+                            ['markusvankempen.WxO-ToolBox-vsc'],
                         );
                     } else if (msg.command === 'openUserGuide') {
-                        await vscode.commands.executeCommand('wxo-toolkit-vsc.openUserGuide');
+                        await vscode.commands.executeCommand('WxO-ToolBox-vsc.openUserGuide');
                     } else if (msg.command === 'getLatestExportReport') {
                         const p = this._findLatestExportReport();
                         this._panel.webview.postMessage({ command: 'latestExportReport', path: p ?? undefined });
@@ -323,7 +323,7 @@ export class WxOScriptsPanel {
         const dir = getScriptsDir(this._extensionUri.fsPath);
         if (!dir) {
             throw new Error(
-                'Scripts not found. The extension bundles scripts—reinstall the extension, or set `wxo-toolkit-vsc.scriptsPath` to a folder containing wxo-toolkit-cli scripts (wxo_exporter_importer.sh).',
+                'Scripts not found. The extension bundles scripts—reinstall the extension, or set `WxO-ToolBox-vsc.scriptsPath` to a folder containing wxo-toolkit-cli scripts (wxo_exporter_importer.sh).',
             );
         }
         return dir;
@@ -1753,7 +1753,7 @@ print(json.dumps(out))
   <!-- Tab content -->
   <div class="tab-body">
 
-    ${!ok ? `<div class="warn-box">⚠ Scripts not found at <code>${scriptsPath}</code>. Open the <code>wxo-toolkit-cli</code> folder as workspace, or set <code>wxo-toolkit-vsc.scriptsPath</code> to the wxo-toolkit-cli folder.</div>` : ''}
+    ${!ok ? `<div class="warn-box">⚠ Scripts not found at <code>${scriptsPath}</code>. Open the <code>wxo-toolkit-cli</code> folder as workspace, or set <code>WxO-ToolBox-vsc.scriptsPath</code> to the wxo-toolkit-cli folder.</div>` : ''}
 
     <!-- Export -->
     <div id="pane-export" class="tab-pane active">
@@ -2087,7 +2087,7 @@ print(json.dumps(out))
       <div style="margin-bottom:16px;">
         <h4 style="font-size:13px;margin-bottom:8px;">Prerequisites</h4>
         <p style="font-size:12px;margin:0 0 8px 0;">Requires <a href="#" id="linkInstall">orchestrate CLI</a>, jq, and unzip. Add environments in the Systems tab (API keys stored securely).</p>
-        <p style="font-size:12px;margin:8px 0 0 0;"><strong>Python venv?</strong> If orchestrate is installed in a virtual environment, set <code>wxo-toolkit-vsc.orchestrateVenvPath</code> (Settings → search "venv") to your venv folder (e.g. <code>.venv</code>).</p>
+        <p style="font-size:12px;margin:8px 0 0 0;"><strong>Python venv?</strong> If orchestrate is installed in a virtual environment, set <code>WxO-ToolBox-vsc.orchestrateVenvPath</code> (Settings → search "venv") to your venv folder (e.g. <code>.venv</code>).</p>
       </div>
 
       <div class="btn-row" style="margin-top:20px;">
@@ -2099,7 +2099,7 @@ print(json.dumps(out))
     <!-- Dependencies -->
     <div id="pane-deps" class="tab-pane">
       <p class="hint">Check that all required CLI tools are installed and in PATH.</p>
-      <p class="hint" style="margin-top:8px;">Using orchestrate in a Python venv? Set <code>wxo-toolkit-vsc.orchestrateVenvPath</code> in Settings to your venv folder (e.g. <code>.venv</code>).</p>
+      <p class="hint" style="margin-top:8px;">Using orchestrate in a Python venv? Set <code>WxO-ToolBox-vsc.orchestrateVenvPath</code> in Settings to your venv folder (e.g. <code>.venv</code>).</p>
       <div class="btn-row" style="margin-bottom:12px;">
         <button class="btn" id="btnCheckDeps">🔍 Check dependencies</button>
         <button class="btn btn-secondary" id="btnOpenDocs">📖 Install docs</button>

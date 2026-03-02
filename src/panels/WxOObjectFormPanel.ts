@@ -310,7 +310,7 @@ export class WxOObjectFormPanel {
         term.show();
         term.sendText(lines.join('\n'));
         vscode.window.showInformationMessage(`WxO: ${verb.toLowerCase()}ing ${label} "${name}" — check the terminal.`);
-        vscode.commands.executeCommand('wxo-toolkit-vsc.refreshView');
+        vscode.commands.executeCommand('WxO-ToolBox-vsc.refreshView');
     }
 
     private async _handleLoadFromFile(): Promise<void> {

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the WxO ToolBox VS Code extension ([wxo-toolkit-vsc](https://github.com/markusvankempen/wxo-toolkit-vsc)).
+All notable changes to the WxO ToolBox VS Code extension ([WxO-ToolBox-vsc](https://github.com/markusvankempen/WxO-ToolBox-vsc)).
 
 ## [1.2.4] - 2026-02-27
 
@@ -121,6 +121,6 @@ All notable changes to the WxO ToolBox VS Code extension ([wxo-toolkit-vsc](http
 
 ### Configuration
 
-- `wxo-toolkit-vsc.scriptsPath` — Path to wxo-toolkit-cli scripts (default: use bundled)
-- `wxo-toolkit-vsc.wxoRoot` — WxO project root (default: `{workspaceRoot}/WxO`)
-- `wxo-toolkit-vsc.debugPanel` — Write panel HTML for browser debugging
+- `WxO-ToolBox-vsc.scriptsPath` — Path to wxo-toolkit-cli scripts (default: use bundled)
+- `WxO-ToolBox-vsc.wxoRoot` — WxO project root (default: `{workspaceRoot}/WxO`)
+- `WxO-ToolBox-vsc.debugPanel` — Write panel HTML for browser debugging

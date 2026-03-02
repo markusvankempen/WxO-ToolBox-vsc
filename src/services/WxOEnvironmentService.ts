@@ -56,7 +56,7 @@ export class WxOEnvironmentService {
 
     /** Root folder for WxO (Exports, Replicate, Compare, Systems, Tools). */
     getWxORoot(): string {
-        const cfg = vscode.workspace.getConfiguration('wxo-toolkit-vsc');
+        const cfg = vscode.workspace.getConfiguration('WxO-ToolBox-vsc');
         const custom = cfg.get<string>('wxoRoot')?.trim();
         const ws = (vscode.workspace.workspaceFolders?.[0]?.uri.fsPath) ?? process.cwd();
         if (custom) {

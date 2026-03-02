@@ -186,7 +186,7 @@ export class WxOPluginEditorPanel {
         vscode.window.showInformationMessage(
             `WxO: Updating plugin "${this._pluginName}" — check the terminal.`,
         );
-        vscode.commands.executeCommand('wxo-toolkit-vsc.refreshView');
+        vscode.commands.executeCommand('WxO-ToolBox-vsc.refreshView');
     }
 
     private async _handleOpenInEditor(msg: Record<string, unknown>): Promise<void> {

@@ -1,5 +1,5 @@
 {
-  "name": "wxo-toolkit-vsc",
+  "name": "WxO-ToolBox-vsc",
   "displayName": "WxO ToolBox",
   "description": "IBM Watsonx Orchestrate (WxO) ToolBox for VS Code. Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, and connections. Create tools, validate configs, and migrate between environments via orchestrate CLI. Formerly branded as WxO Toolkit.",
   "publisher": "markusvankempen",
@@ -17,7 +17,7 @@
   },
   "qna": "https://github.com/markusvankempen/WxO-ToolBox-vsc/issues",
   "license": "Apache-2.0",
-  "version": "1.2.4",
+  "version": "2.0.1",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -65,170 +65,170 @@
   },
   "badges": [
     {
-      "url": "https://img.shields.io/visual-studio-marketplace/v/markusvankempen.wxo-toolkit-vsc.png",
-      "href": "https://marketplace.visualstudio.com/items?itemName=markusvankempen.wxo-toolkit-vsc",
+      "url": "https://img.shields.io/visual-studio-marketplace/v/markusvankempen.WxO-ToolBox-vsc.png",
+      "href": "https://marketplace.visualstudio.com/items?itemName=markusvankempen.WxO-ToolBox-vsc",
       "description": "Version"
     },
     {
-      "url": "https://img.shields.io/visual-studio-marketplace/d/markusvankempen.wxo-toolkit-vsc.png",
-      "href": "https://marketplace.visualstudio.com/items?itemName=markusvankempen.wxo-toolkit-vsc",
+      "url": "https://img.shields.io/visual-studio-marketplace/d/markusvankempen.WxO-ToolBox-vsc.png",
+      "href": "https://marketplace.visualstudio.com/items?itemName=markusvankempen.WxO-ToolBox-vsc",
       "description": "Downloads"
     }
   ],
   "contributes": {
     "commands": [
       {
-        "command": "wxo-toolkit-vsc.openPanel",
+        "command": "WxO-ToolBox-vsc.openPanel",
         "title": "WxO ToolBox: Open Panel",
         "icon": "$(rocket)"
       },
       {
-        "command": "wxo-toolkit-vsc.selectEnvironment",
+        "command": "WxO-ToolBox-vsc.selectEnvironment",
         "title": "Select Environment",
         "icon": "$(server)"
       },
       {
-        "command": "wxo-toolkit-vsc.refreshView",
+        "command": "WxO-ToolBox-vsc.refreshView",
         "title": "Refresh",
         "icon": "$(refresh)"
       },
       {
-        "command": "wxo-toolkit-vsc.searchResources",
+        "command": "WxO-ToolBox-vsc.searchResources",
         "title": "Search Resources",
         "icon": "$(search)"
       },
       {
-        "command": "wxo-toolkit-vsc.filterResources",
+        "command": "WxO-ToolBox-vsc.filterResources",
         "title": "Filter Resources",
         "icon": "$(filter)"
       },
       {
-        "command": "wxo-toolkit-vsc.clearFilter",
+        "command": "WxO-ToolBox-vsc.clearFilter",
         "title": "Clear Filter",
         "icon": "$(clear-all)"
       },
       {
-        "command": "wxo-toolkit-vsc.viewResourceJson",
+        "command": "WxO-ToolBox-vsc.viewResourceJson",
         "title": "View JSON Definition",
         "icon": "$(json)"
       },
       {
-        "command": "wxo-toolkit-vsc.editResource",
+        "command": "WxO-ToolBox-vsc.editResource",
         "title": "Edit (open form)",
         "icon": "$(edit)"
       },
       {
-        "command": "wxo-toolkit-vsc.deleteResource",
+        "command": "WxO-ToolBox-vsc.deleteResource",
         "title": "Delete",
         "icon": "$(trash)"
       },
       {
-        "command": "wxo-toolkit-vsc.compareResource",
+        "command": "WxO-ToolBox-vsc.compareResource",
         "title": "Compare with environment",
         "icon": "$(diff)"
       },
       {
-        "command": "wxo-toolkit-vsc.exportResource",
+        "command": "WxO-ToolBox-vsc.exportResource",
         "title": "Export to file",
         "icon": "$(arrow-up)"
       },
       {
-        "command": "wxo-toolkit-vsc.copyResource",
+        "command": "WxO-ToolBox-vsc.copyResource",
         "title": "Copy to environment",
         "icon": "$(copy)"
       },
       {
-        "command": "wxo-toolkit-vsc.showExtension",
+        "command": "WxO-ToolBox-vsc.showExtension",
         "title": "WxO ToolBox: Show Extension",
         "icon": "$(extensions)"
       },
       {
-        "command": "wxo-toolkit-vsc.openUserGuide",
+        "command": "WxO-ToolBox-vsc.openUserGuide",
         "title": "Open User Guide",
         "icon": "$(book)"
       },
       {
-        "command": "wxo-toolkit-vsc.openTraceDetail",
+        "command": "WxO-ToolBox-vsc.openTraceDetail",
         "title": "WxO ToolBox: Open Trace Detail",
         "icon": "$(graph)"
       },
       {
-        "command": "wxo-toolkit-vsc.openTraceDetailFromFile",
+        "command": "WxO-ToolBox-vsc.openTraceDetailFromFile",
         "title": "View Trace Detail",
         "icon": "$(graph)"
       },
       {
-        "command": "wxo-toolkit-vsc.importToolFromFilesystem",
+        "command": "WxO-ToolBox-vsc.importToolFromFilesystem",
         "title": "Import Tool",
         "icon": "$(folder-opened)"
       },
       {
-        "command": "wxo-toolkit-vsc.createTool",
+        "command": "WxO-ToolBox-vsc.createTool",
         "title": "Create Tool",
         "icon": "$(add)"
       },
       {
-        "command": "wxo-toolkit-vsc.createPlugin",
+        "command": "WxO-ToolBox-vsc.createPlugin",
         "title": "Create Plugin",
         "icon": "$(add)"
       },
       {
-        "command": "wxo-toolkit-vsc.editPlugin",
+        "command": "WxO-ToolBox-vsc.editPlugin",
         "title": "Edit Plugin",
         "icon": "$(edit)"
       },
       {
-        "command": "wxo-toolkit-vsc.createAgent",
+        "command": "WxO-ToolBox-vsc.createAgent",
         "title": "Create Agent",
         "icon": "$(add)"
       },
       {
-        "command": "wxo-toolkit-vsc.createFlow",
+        "command": "WxO-ToolBox-vsc.createFlow",
         "title": "Create Flow",
         "icon": "$(add)"
       },
       {
-        "command": "wxo-toolkit-vsc.createConnection",
+        "command": "WxO-ToolBox-vsc.createConnection",
         "title": "Create Connection",
         "icon": "$(add)"
       },
       {
-        "command": "wxo-toolkit-vsc.openDirFile",
+        "command": "WxO-ToolBox-vsc.openDirFile",
         "title": "Open / Edit",
         "icon": "$(go-to-file)"
       },
       {
-        "command": "wxo-toolkit-vsc.revealInExplorer",
+        "command": "WxO-ToolBox-vsc.revealInExplorer",
         "title": "Reveal in File Explorer",
         "icon": "$(folder-opened)"
       },
       {
-        "command": "wxo-toolkit-vsc.copyFilePath",
+        "command": "WxO-ToolBox-vsc.copyFilePath",
         "title": "Copy Path",
         "icon": "$(clippy)"
       },
       {
-        "command": "wxo-toolkit-vsc.newDirFile",
+        "command": "WxO-ToolBox-vsc.newDirFile",
         "title": "New File",
         "icon": "$(new-file)"
       },
       {
-        "command": "wxo-toolkit-vsc.newDirFolder",
+        "command": "WxO-ToolBox-vsc.newDirFolder",
         "title": "New Folder",
         "icon": "$(new-folder)"
       },
       {
-        "command": "wxo-toolkit-vsc.renameDirItem",
+        "command": "WxO-ToolBox-vsc.renameDirItem",
         "title": "Rename",
         "icon": "$(edit)"
       },
       {
-        "command": "wxo-toolkit-vsc.deleteDirItem",
+        "command": "WxO-ToolBox-vsc.deleteDirItem",
         "title": "Delete",
         "icon": "$(trash)"
       },
       {
-        "command": "wxo-toolkit-vsc.openDirInTerminal",
+        "command": "WxO-ToolBox-vsc.openDirInTerminal",
         "title": "Open in Terminal",
         "icon": "$(terminal)"
       }
@@ -236,29 +236,29 @@
     "keybindings": [
       {
         "key": "delete",
-        "command": "wxo-toolkit-vsc.deleteResource",
-        "when": "focusedView == wxo-toolkit-vsc-main"
+        "command": "WxO-ToolBox-vsc.deleteResource",
+        "when": "focusedView == WxO-ToolBox-vsc-main"
       }
     ],
     "configuration": {
       "title": "WxO ToolBox",
       "properties": {
-        "wxo-toolkit-vsc.scriptsPath": {
+        "WxO-ToolBox-vsc.scriptsPath": {
           "type": "string",
           "default": "",
           "markdownDescription": "Path to wxo-toolkit-cli scripts (folder containing wxo_exporter_importer.sh). Leave empty to use bundled scripts from the extension."
         },
-        "wxo-toolkit-vsc.wxoRoot": {
+        "WxO-ToolBox-vsc.wxoRoot": {
           "type": "string",
           "default": "",
           "markdownDescription": "WxO Project Dir: root folder for Exports, Imports, Compare, Systems, Tools. Default: `{workspaceRoot}/WxO`."
         },
-        "wxo-toolkit-vsc.debugPanel": {
+        "WxO-ToolBox-vsc.debugPanel": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "When true, writes the panel HTML to `.vscode/wxo-panel-debug.html` so you can open it in a browser and see JS errors in DevTools (F12). Also logs panel errors to the Output channel."
         },
-        "wxo-toolkit-vsc.orchestrateVenvPath": {
+        "WxO-ToolBox-vsc.orchestrateVenvPath": {
           "type": "string",
           "default": "",
           "markdownDescription": "Path to Python venv where orchestrate CLI is installed (e.g. `.venv` or `venv`). **Required if orchestrate is in a venv** — the extension prepends venv/bin to PATH so Export/Import/Compare/Create Tool find the orchestrate command. Use workspace-relative (`.venv`) or absolute path (`/path/to/venv`)."
@@ -268,16 +268,16 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "wxo-toolkit-vsc",
+          "id": "WxO-ToolBox-vsc",
           "title": "WxO ToolBox",
           "icon": "resources/activity-icon.png"
         }
       ]
     },
     "views": {
-      "wxo-toolkit-vsc": [
+      "WxO-ToolBox-vsc": [
         {
-          "id": "wxo-toolkit-vsc-main",
+          "id": "WxO-ToolBox-vsc-main",
           "name": "WxO ToolBox",
           "type": "tree"
         }
@@ -285,318 +285,318 @@
     },
     "viewsWelcome": [
       {
-        "view": "wxo-toolkit-vsc-main",
-        "contents": "**WxO ToolBox**\n\nExport, import, compare and replicate Watson Orchestrate agents, tools, flows and connections.\n\n[$(rocket) Open Panel](command:wxo-toolkit-vsc.openPanel)\n\n[$(server) Select Environment](command:wxo-toolkit-vsc.selectEnvironment)\n\n[$(book) User Guide](command:wxo-toolkit-vsc.openUserGuide)\n\n[$(extensions) View Extension](command:wxo-toolkit-vsc.showExtension)",
-        "when": "wxo-toolkit-vsc.noEnv"
+        "view": "WxO-ToolBox-vsc-main",
+        "contents": "**WxO ToolBox**\n\nExport, import, compare and replicate Watson Orchestrate agents, tools, flows and connections.\n\n[$(rocket) Open Panel](command:WxO-ToolBox-vsc.openPanel)\n\n[$(server) Select Environment](command:WxO-ToolBox-vsc.selectEnvironment)\n\n[$(book) User Guide](command:WxO-ToolBox-vsc.openUserGuide)\n\n[$(extensions) View Extension](command:WxO-ToolBox-vsc.showExtension)",
+        "when": "WxO-ToolBox-vsc.noEnv"
       }
     ],
     "menus": {
       "view/item/context": [
         {
-          "command": "wxo-toolkit-vsc.createTool",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-category-tools",
+          "command": "WxO-ToolBox-vsc.createTool",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-category-tools",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.importToolFromFilesystem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-category-tools",
+          "command": "WxO-ToolBox-vsc.importToolFromFilesystem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-category-tools",
           "group": "inline@2"
         },
         {
-          "command": "wxo-toolkit-vsc.createAgent",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-category-agents",
+          "command": "WxO-ToolBox-vsc.createAgent",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-category-agents",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.createFlow",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-category-flows",
+          "command": "WxO-ToolBox-vsc.createFlow",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-category-flows",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.createConnection",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-category-connections",
+          "command": "WxO-ToolBox-vsc.createConnection",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-category-connections",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.createPlugin",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-category-plugins",
+          "command": "WxO-ToolBox-vsc.createPlugin",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-category-plugins",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.viewResourceJson",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.viewResourceJson",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.exportResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.exportResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "inline@2"
         },
         {
-          "command": "wxo-toolkit-vsc.copyResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.copyResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "inline@3"
         },
         {
-          "command": "wxo-toolkit-vsc.editResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/ && viewItem != wxo-resource-plugins",
+          "command": "WxO-ToolBox-vsc.editResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/ && viewItem != wxo-resource-plugins",
           "group": "inline@4"
         },
         {
-          "command": "wxo-toolkit-vsc.editPlugin",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-resource-plugins",
+          "command": "WxO-ToolBox-vsc.editPlugin",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-resource-plugins",
           "group": "inline@4"
         },
         {
-          "command": "wxo-toolkit-vsc.compareResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.compareResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "inline@5"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.deleteResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "inline@6"
         },
         {
-          "command": "wxo-toolkit-vsc.viewResourceJson",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.viewResourceJson",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "wxo@1"
         },
         {
-          "command": "wxo-toolkit-vsc.exportResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.exportResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "wxo@2"
         },
         {
-          "command": "wxo-toolkit-vsc.copyResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.copyResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "wxo@3"
         },
         {
-          "command": "wxo-toolkit-vsc.editResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/ && viewItem != wxo-resource-plugins",
+          "command": "WxO-ToolBox-vsc.editResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/ && viewItem != wxo-resource-plugins",
           "group": "wxo@4"
         },
         {
-          "command": "wxo-toolkit-vsc.editPlugin",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-resource-plugins",
+          "command": "WxO-ToolBox-vsc.editPlugin",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-resource-plugins",
           "group": "wxo@4"
         },
         {
-          "command": "wxo-toolkit-vsc.compareResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.compareResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "wxo@5"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteResource",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-resource-/",
+          "command": "WxO-ToolBox-vsc.deleteResource",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-resource-/",
           "group": "wxo@6"
         },
         {
-          "command": "wxo-toolkit-vsc.newDirFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-root",
+          "command": "WxO-ToolBox-vsc.newDirFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-root",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.newDirFolder",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-root",
+          "command": "WxO-ToolBox-vsc.newDirFolder",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-root",
           "group": "inline@2"
         },
         {
-          "command": "wxo-toolkit-vsc.revealInExplorer",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-root",
+          "command": "WxO-ToolBox-vsc.revealInExplorer",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-root",
           "group": "inline@3"
         },
         {
-          "command": "wxo-toolkit-vsc.openDirInTerminal",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-root",
+          "command": "WxO-ToolBox-vsc.openDirInTerminal",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-root",
           "group": "wxo-dir@1"
         },
         {
-          "command": "wxo-toolkit-vsc.revealInExplorer",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-root",
+          "command": "WxO-ToolBox-vsc.revealInExplorer",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-root",
           "group": "wxo-dir@2"
         },
         {
-          "command": "wxo-toolkit-vsc.newDirFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.newDirFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.newDirFolder",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.newDirFolder",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "inline@2"
         },
         {
-          "command": "wxo-toolkit-vsc.renameDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.renameDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "inline@3"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.deleteDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "inline@4"
         },
         {
-          "command": "wxo-toolkit-vsc.revealInExplorer",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.revealInExplorer",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "wxo-dir@1"
         },
         {
-          "command": "wxo-toolkit-vsc.openDirInTerminal",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.openDirInTerminal",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "wxo-dir@2"
         },
         {
-          "command": "wxo-toolkit-vsc.copyFilePath",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.copyFilePath",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "wxo-dir@3"
         },
         {
-          "command": "wxo-toolkit-vsc.renameDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.renameDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "wxo-dir@4"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-folder",
+          "command": "WxO-ToolBox-vsc.deleteDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-folder",
           "group": "wxo-dir@5"
         },
         {
-          "command": "wxo-toolkit-vsc.openDirFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.openDirFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.renameDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.renameDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "inline@2"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.deleteDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "inline@3"
         },
         {
-          "command": "wxo-toolkit-vsc.openDirFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.openDirFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "wxo-dir@1"
         },
         {
-          "command": "wxo-toolkit-vsc.revealInExplorer",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.revealInExplorer",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "wxo-dir@2"
         },
         {
-          "command": "wxo-toolkit-vsc.copyFilePath",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.copyFilePath",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "wxo-dir@3"
         },
         {
-          "command": "wxo-toolkit-vsc.renameDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.renameDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "wxo-dir@4"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-env-file",
+          "command": "WxO-ToolBox-vsc.deleteDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-env-file",
           "group": "wxo-dir@5"
         },
         {
-          "command": "wxo-toolkit-vsc.openDirFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.openDirFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "inline@1"
         },
         {
-          "command": "wxo-toolkit-vsc.renameDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.renameDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "inline@2"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.deleteDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "inline@3"
         },
         {
-          "command": "wxo-toolkit-vsc.openDirFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.openDirFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "wxo-dir@1"
         },
         {
-          "command": "wxo-toolkit-vsc.openTraceDetailFromFile",
-          "when": "view == wxo-toolkit-vsc-main && viewItem == wxo-dir-json-file",
+          "command": "WxO-ToolBox-vsc.openTraceDetailFromFile",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem == wxo-dir-json-file",
           "group": "wxo-dir@1.5"
         },
         {
-          "command": "wxo-toolkit-vsc.revealInExplorer",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.revealInExplorer",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "wxo-dir@2"
         },
         {
-          "command": "wxo-toolkit-vsc.copyFilePath",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.copyFilePath",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "wxo-dir@3"
         },
         {
-          "command": "wxo-toolkit-vsc.renameDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.renameDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "wxo-dir@4"
         },
         {
-          "command": "wxo-toolkit-vsc.deleteDirItem",
-          "when": "view == wxo-toolkit-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
+          "command": "WxO-ToolBox-vsc.deleteDirItem",
+          "when": "view == WxO-ToolBox-vsc-main && viewItem =~ /^wxo-dir-(yaml|json|py|sh|)-?file$/",
           "group": "wxo-dir@5"
         }
       ],
       "view/title": [
         {
-          "command": "wxo-toolkit-vsc.selectEnvironment",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.selectEnvironment",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@1"
         },
         {
-          "command": "wxo-toolkit-vsc.searchResources",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.searchResources",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@1.5"
         },
         {
-          "command": "wxo-toolkit-vsc.filterResources",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.filterResources",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@1.6"
         },
         {
-          "command": "wxo-toolkit-vsc.clearFilter",
-          "when": "view == wxo-toolkit-vsc-main && wxo-toolkit-vsc.hasFilter",
+          "command": "WxO-ToolBox-vsc.clearFilter",
+          "when": "view == WxO-ToolBox-vsc-main && WxO-ToolBox-vsc.hasFilter",
           "group": "navigation@1.7"
         },
         {
-          "command": "wxo-toolkit-vsc.createTool",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.createTool",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@2"
         },
         {
-          "command": "wxo-toolkit-vsc.createPlugin",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.createPlugin",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@2"
         },
         {
-          "command": "wxo-toolkit-vsc.importToolFromFilesystem",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.importToolFromFilesystem",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@3"
         },
         {
-          "command": "wxo-toolkit-vsc.refreshView",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.refreshView",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@4"
         },
         {
-          "command": "wxo-toolkit-vsc.openPanel",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.openPanel",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@5"
         },
         {
-          "command": "wxo-toolkit-vsc.openUserGuide",
-          "when": "view == wxo-toolkit-vsc-main",
+          "command": "WxO-ToolBox-vsc.openUserGuide",
+          "when": "view == WxO-ToolBox-vsc-main",
           "group": "navigation@6"
         }
       ]
@@ -616,6 +616,7 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
+    "@types/node": "^25.3.3",
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^2.26.0",
     "esbuild": "^0.24.0",
