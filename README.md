@@ -49,7 +49,7 @@ Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, 
 | Repo | Description |
 |------|--------------|
 | [WxO-Importer-Export-Comparer-Validator](https://github.com/markusvankempen/WxO-Importer-Export-Comparer-Validator) | CLI toolkit (shell scripts) — the scripts this extension bundles and runs. Use it standalone for terminal-based Export/Import/Compare. |
-| [WxO-ToolBox-VSC](https://github.com/markusvankempen/WxO-ToolBox-VSC) | Future standalone repository for the WxO ToolBox VS Code extension. Currently the extension lives inside the watsonx-orchestrate-devkit monorepo; this repo will eventually become the primary home. |
+| [WxO-ToolBox-vsc](https://github.com/markusvankempen/WxO-ToolBox-vsc) | Future standalone repository for the WxO ToolBox VS Code extension. Currently the extension lives inside the watsonx-orchestrate-devkit monorepo; this repo will eventually become the primary home. |
 
 ## Install from source
 
