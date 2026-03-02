@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/markusvankempen/wxo-toolkit-vsc.git"
+    "url": "https://github.com/markusvankempen/WxO-ToolBox-VSC.git"
   },
-  "homepage": "https://github.com/markusvankempen/wxo-toolkit-vsc#readme",
+  "homepage": "https://github.com/markusvankempen/WxO-ToolBox-VSC#readme",
   "bugs": {
-    "url": "https://github.com/markusvankempen/wxo-toolkit-vsc/issues"
+    "url": "https://github.com/markusvankempen/WxO-ToolBox-VSC/issues"
   },
-  "qna": "https://github.com/markusvankempen/wxo-toolkit-vsc/issues",
+  "qna": "https://github.com/markusvankempen/WxO-ToolBox-VSC/issues",
   "license": "Apache-2.0",
   "version": "1.2.4",
   "engines": {
