@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Script: import_to_wxo.sh
-# Version: 1.0.8
+# Version: 1.0.9
 # Author: Markus van Kempen <mvankempen@ca.ibm.com>, <markus.van.kempen@gmail.com>
 # Date: Feb 25, 2026
 #
@@ -62,15 +62,16 @@ while [[ $# -gt 0 ]]; do
     --no-credential-prompt) SKIP_ENV_PROMPT=true; shift ;;
     --if-exists)     IF_EXISTS="${2:-override}"; [[ $# -ge 2 ]] && shift 2 || shift ;;
     --env-file)      ENV_FILE="${2:-}"; [[ $# -ge 2 ]] && shift 2 || shift ;;
+    --env-conn-source) ENV_CONN_SOURCE="${2:-}"; [[ $# -ge 2 ]] && shift 2 || shift ;;
     --validate)      VALIDATE=true; shift ;;
     --validate-with-source) VALIDATE=true; VALIDATE_SOURCE_ENV="${2:-}"; [[ $# -ge 2 ]] && shift 2 || shift ;;
     -v|--version)
-      echo "import_to_wxo.sh 1.0.8"
+      echo "import_to_wxo.sh 1.0.9"
       exit 0
       ;;
     -h|--help)
       echo "Usage: $0 [OPTIONS]"
-      echo "  WxO Importer/Export/Comparer/Validator — Import script v1.0.8"
+      echo "  WxO-ToolBox-cli — Import script v1.0.9"
       echo ""
       echo "Options:"
       echo "  --agents-only   Import only agents (and their tool dependencies)"
@@ -90,6 +91,7 @@ while [[ $# -gt 0 ]]; do
       echo "  --report-dir <dir>  Write report to <dir>/Report/import_report.txt (e.g. TZ2/Import/20260225_094444)"
       echo "  --if-exists <mode>  When resource exists: skip (do not import) | override (update, default)"
       echo "  --env-file <path>   Path to .env for WXO_API_KEY_<ENV> (default: ../../.env)"
+      echo "  --env-conn-source <env> Use connection secrets from this environment's .env_connection file"
       echo "  --validate         After import, invoke each agent with a test prompt; report if it responds"
       echo "  --validate-with-source <env>  Also run test on source env; compare responses (e.g. TZ1)"
       echo "  -h, --help      Show help"
@@ -126,7 +128,11 @@ _conn_lookup="${ENV_CONN_SOURCE:-$ENV_NAME}"
 _parse_connection_kind() {
   local yml="$1"
   [[ ! -f "$yml" ]] && return
-  grep -A 50 'environments:' "$yml" 2>/dev/null | grep -A 20 'live:' | grep '^\s*kind:' | head -1 | sed 's/.*kind:\s*\([a-z_]*\).*/\1/'
+  awk -F'[: ]+' '
+    /^environments:/ {in_env=1}
+    in_env && (/^[[:space:]]+live:/ || /live:/) {in_live=1}
+    in_live && /^[[:space:]]+kind:/ {print $3; exit}
+  ' "$yml" 2>/dev/null
 }
 
 # Map connection kind to set-credentials flag names
@@ -349,15 +355,15 @@ _fetch_existing_resources() {
   EXISTING_TOOLS=$(echo "$tools_json" | jq -r '
     (if type == "array" then . else (.tools // .native // .data // .items) end) |
     if type == "array" then . else [] end |
-    .[] | select(type == "object") | (.name // .id) // empty
+    .[] | select(type == "object" and .kind != "toolkit" and .type != "toolkit") | (.name // .id) // empty
   ' 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)
   EXISTING_AGENTS=$(echo "$agents_json" | jq -r '
-    (.native // .agents // .data // .items // .) |
+    (if type == "array" then . else (.native // .agents // .data // .items) end) |
     if type == "array" then . else [] end |
     .[] | select(type == "object") | (.name // .id) // empty
   ' 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)
   EXISTING_CONNECTIONS=$(echo "$conn_json" | jq -r '
-    (.live // .connections // .data // .items // .) |
+    (if type == "array" then . else (.live // .connections // .data // .items) end) |
     if type == "array" then . else [] end |
     .[] | select(type == "object") | (.app_id // .appId // .id // .name) // empty |
     select(length > 0)
@@ -490,7 +496,7 @@ _fill_report_ids() {
   tool_ids=$(echo "$tools_json" | jq -r '
     (if type == "array" then . else (.tools // .native // .data // .items) end) |
     if type == "array" then . else [] end |
-    .[] | select(type == "object") | "\(.name // .id // "")|\(.id // ._id // "" | tostring)"
+    .[] | select(type == "object" and .kind != "toolkit" and .type != "toolkit") | "\(.name // .id // "")|\(.id // ._id // "" | tostring)"
   ' 2>/dev/null) || true
   conn_ids=$(echo "$conn_json" | jq -r '
     (if type == "array" then . else (.live // .connections // .data // .) end) |
@@ -499,7 +505,7 @@ _fill_report_ids() {
     "\(.app_id // .appId // .id // .name // "")|\(.id // ._id // "" | tostring)"
   ' 2>/dev/null) || true
   agent_ids=$(echo "$agents_json" | jq -r '
-    (.native // .agents // .data // .items // .) |
+    (if type == "array" then . else (.native // .agents // .data // .items) end) |
     if type == "array" then . else [] end |
     .[] | select(type == "object") | "\(.name // .id // "")|\(.id // ._id // "" | tostring)"
   ' 2>/dev/null) || true
@@ -593,8 +599,10 @@ _run_import() {
   if _resource_exists "$type" "$name"; then
     _record_import "$type" "$name" "SKIPPED" "-" "already exists"
     echo "     ⏭ skipped (exists)"
+    LAST_IMPORT_RC=2
     return 0
   fi
+  LAST_IMPORT_RC=0
   local out id errmsg rc
   set +e
   out=$(eval "$cmd" 2>&1)
@@ -700,12 +708,18 @@ for SUBDIR in "$TOOLS_DIR"/*/; do
         [[ -z "$TOOL_CONN_APP_ID" ]] && TOOL_CONN_APP_ID="$CONN_APP_ID"
         echo "  → $CONN_APP_ID (connection for $TOOL_NAME)"
         _run_import "$CONN_APP_ID" "Connection" "orchestrate connections import -f \"$CONN_YAML\""
+        import_rc=$LAST_IMPORT_RC
+        ENV_CONN_FILE_LOCAL=""
         if [[ -n "$_conn_lookup" ]]; then
-          ENV_CONN_FILE="${WXO_ROOT}/Systems/${_conn_lookup}/Connections/.env_connection_${_conn_lookup}"
-          if [[ -f "$ENV_CONN_FILE" ]] && _set_connection_credentials_from_env "$CONN_APP_ID" "$CONN_YAML" "$ENV_CONN_FILE"; then
+          ENV_CONN_FILE_LOCAL="${WXO_ROOT}/Systems/${_conn_lookup}/Connections/.env_connection_${_conn_lookup}"
+          [[ ! -f "$ENV_CONN_FILE_LOCAL" ]] && ENV_CONN_FILE_LOCAL=""
+        fi
+        if [[ $import_rc -ne 2 ]] && [[ -n "$ENV_CONN_FILE_LOCAL" ]]; then
+          if _set_connection_credentials_from_env "$CONN_APP_ID" "$CONN_YAML" "$ENV_CONN_FILE_LOCAL"; then
             echo "     ✓ credentials set"
             _update_last_connection_note "credentials set"
-          elif [[ -f "$ENV_CONN_FILE" ]]; then
+          else
+            echo "     ⚠ credentials not set"
             _update_last_connection_note "credentials not set"
           fi
         fi
@@ -813,11 +827,20 @@ for AGENT_SUBDIR in "$AGENTS_DIR"/*/; do
           [[ -z "$TOOL_CONN_APP_ID" ]] && TOOL_CONN_APP_ID="$CONN_APP_ID"
           echo "  → $CONN_APP_ID (connection for $TOOL_NAME)"
           _run_import "$CONN_APP_ID" "Connection" "orchestrate connections import -f \"$CONN_YAML\""
-          if [[ -n "$ENV_NAME" ]] && [[ -n "$ENV_CONN_FILE" ]] && _set_connection_credentials_from_env "$CONN_APP_ID" "$CONN_YAML" "$ENV_CONN_FILE"; then
-            echo "     ✓ credentials set"
-            _update_last_connection_note "credentials set"
-          elif [[ -n "$ENV_CONN_FILE" ]]; then
-            _update_last_connection_note "credentials not set"
+          import_rc=$LAST_IMPORT_RC
+          ENV_CONN_FILE_LOCAL=""
+          if [[ -n "$_conn_lookup" ]]; then
+            ENV_CONN_FILE_LOCAL="${WXO_ROOT}/Systems/${_conn_lookup}/Connections/.env_connection_${_conn_lookup}"
+            [[ ! -f "$ENV_CONN_FILE_LOCAL" ]] && ENV_CONN_FILE_LOCAL=""
+          fi
+          if [[ $import_rc -ne 2 ]] && [[ -n "$ENV_CONN_FILE_LOCAL" ]]; then
+            if _set_connection_credentials_from_env "$CONN_APP_ID" "$CONN_YAML" "$ENV_CONN_FILE_LOCAL"; then
+              echo "     ✓ credentials set"
+              _update_last_connection_note "credentials set"
+            else
+              echo "     ⚠ credentials not set"
+              _update_last_connection_note "credentials not set"
+            fi
           fi
         done
       fi
@@ -925,8 +948,11 @@ for CONN_FILE in "$CONNECTIONS_DIR"/*.yml "$CONNECTIONS_DIR"/*.yaml; do
   _matches_filter "$APP_ID" "$CONNECTION_FILTER" || continue
   echo "  → $APP_ID"
   _run_import "$APP_ID" "Connection" "orchestrate connections import -f \"$CONN_FILE\""
+  import_rc=$LAST_IMPORT_RC
   # When .env_connection exists, set credentials (function exits early if no values for this app)
-  if [[ -n "$ENV_CONN_FILE" ]]; then
+  if [[ $import_rc -eq 2 ]]; then
+    : # Skip credential setting if import was skipped
+  elif [[ -n "$ENV_CONN_FILE" ]]; then
     if _set_connection_credentials_from_env "$APP_ID" "$CONN_FILE" "$ENV_CONN_FILE"; then
       echo "     ✓ credentials set"
       _update_last_connection_note "credentials set"

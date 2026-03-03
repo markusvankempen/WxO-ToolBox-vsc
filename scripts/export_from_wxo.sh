@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Script: export_from_wxo.sh
-# Version: 1.0.8
+# Version: 1.0.9
 # Author: Markus van Kempen <mvankempen@ca.ibm.com>, <markus.van.kempen@gmail.com>
 # Date: Feb 25, 2026
 #
@@ -64,7 +64,7 @@ while [[ $# -gt 0 ]]; do
             ;;
         -h|--help)
             echo "Usage: $0 [OPTIONS]"
-            echo "  WxO Importer/Export/Comparer/Validator — Export script v1.0.8"
+            echo "  WxO-ToolBox-cli — Export script v1.0.9"
             echo ""
             echo "Options:"
             echo "  --agent-only    Export agents without their tool/flow dependencies (YAML only)"
@@ -137,7 +137,11 @@ _in_list_filter() {
 _parse_connection_kind() {
   local yml="$1"
   [[ ! -f "$yml" ]] && return
-  grep -A 50 'environments:' "$yml" 2>/dev/null | grep -A 20 'live:' | grep '^\s*kind:' | head -1 | sed 's/.*kind:\s*\([a-z_]*\).*/\1/'
+  awk -F'[: ]+' '
+    /^environments:/ {in_env=1}
+    in_env && (/^[[:space:]]+live:/ || /live:/) {in_live=1}
+    in_live && /^[[:space:]]+kind:/ {print $3; exit}
+  ' "$yml" 2>/dev/null
 }
 
 # Map connection kind to required env var names for set-credentials
@@ -362,6 +366,7 @@ TOOL_ENTRIES=$(echo "$TOOL_LIST_JSON" | jq -r '
    elif .binding.openapi then "openapi"
    elif .binding.langflow then "langflow"
    elif .binding.flow or (.spec.kind == "flow") or (.kind == "flow") then "flow"
+   elif .kind == "toolkit" or .type == "toolkit" then "toolkit"
    else "other"
    end) as $k |
   "\($n)|\($k)|\($id)"
@@ -390,6 +395,11 @@ while IFS='|' read -r TOOL KIND TOOL_ID; do
     if [[ "$KIND" == "skill" ]]; then
         echo "  ⊘ $TOOL (catalog skill) — binding.skill (not exportable)"
         _record_export "Tool" "$TOOL" "SKIPPED" "$TOOL_ID" "(catalog skill, binding.skill)"
+        continue
+    fi
+    if [[ "$KIND" == "toolkit" ]]; then
+        echo "  ⊘ $TOOL (toolkit) — skipped (toolkits excluded by default)"
+        _record_export "Toolkit" "$TOOL" "SKIPPED" "$TOOL_ID" "(excluded)"
         continue
     fi
     _in_list_filter "$TOOL" "$TOOL_FILTER" || continue
@@ -631,9 +641,13 @@ else
         for SEC in $SECRETS; do
           [[ -n "$VAR_LIST" ]] && VAR_LIST="$VAR_LIST, "
           VAR_LIST="${VAR_LIST}CONN_${APP_ID}_${SEC}"
+          
+          # Append secret to template if it doesn't already exist
+          if ! grep -q "^CONN_${APP_ID}_${SEC}=" "$ENV_TEMPLATE" 2>/dev/null; then
+            echo "CONN_${APP_ID}_${SEC}=" >> "$ENV_TEMPLATE"
+          fi
         done
         printf "  %-36s  %-35s  %s\n" "$APP_ID" "$KIND" "$VAR_LIST" >> "$REPORT_PATH"
-        [[ "$write_env" == "true" ]] && for SEC in $SECRETS; do echo "CONN_${APP_ID}_${SEC}=" >> "$ENV_TEMPLATE"; done
       done
 
       {

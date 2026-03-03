@@ -606,7 +606,7 @@
     "compile": "tsc && node esbuild.js",
     "watch": "tsc -w",
     "convert-icons": "node scripts/convert-icons.js",
-    "copy-scripts": "node -e \"const fs=require('fs');const p=require('path');const cwd=process.cwd();const src=p.join(cwd,'..');const dst=p.join(cwd,'scripts');fs.mkdirSync(dst,{recursive:true});['wxo_exporter_importer.sh','export_from_wxo.sh','import_to_wxo.sh','compare_wxo_systems.sh','VERSION'].forEach(f=>fs.copyFileSync(p.join(src,f),p.join(dst,f)));\"",
+    "copy-scripts": "node -e \"const fs=require('fs');const p=require('path');const cwd=process.cwd();const src=p.join(cwd,'../cli');const dst=p.join(cwd,'scripts');fs.mkdirSync(dst,{recursive:true});['wxo-toolbox-cli.sh','export_from_wxo.sh','import_to_wxo.sh','compare_wxo_systems.sh','VERSION'].forEach(f=>fs.copyFileSync(p.join(src,f),p.join(dst,f)));\"",
     "prepackage": "npm run convert-icons && npm run copy-scripts && npm run compile",
     "package": "vsce package",
     "publish": "vsce publish",

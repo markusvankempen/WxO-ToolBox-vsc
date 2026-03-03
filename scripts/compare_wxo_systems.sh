@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Script: compare_wxo_systems.sh
-# Version: 1.0.8
+# Version: 1.0.9
 # Author: Markus van Kempen <mvankempen@ca.ibm.com>, <markus.van.kempen@gmail.com>
 # Date: Feb 25, 2026
 #
@@ -60,7 +60,7 @@ while [[ $# -gt 0 ]]; do
       ;;
     -h|--help)
       echo "Usage: $0 [ENV1] [ENV2] [OPTIONS]"
-      echo "  WxO Importer/Export/Comparer/Validator — Compare script v1.0.9"
+      echo "  WxO-ToolBox-cli — Compare script v1.0.9"
       echo ""
       echo "Compare agents, tools, flows, connections, and plugins between two WXO environments."
       echo ""
@@ -139,8 +139,10 @@ _fetch_tools() {
      elif .binding.openapi then "openapi"
      elif .binding.flow then "flow"
      elif .binding.langflow then "langflow"
+     elif .kind == "toolkit" or .type == "toolkit" then "toolkit"
      else "other"
      end) as $k |
+    select($k != "toolkit") |
     "\($n)|\($k)"
   ' 2>/dev/null || true
 }
