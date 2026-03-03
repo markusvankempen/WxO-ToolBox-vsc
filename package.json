@@ -1,6 +1,6 @@
 {
   "name": "WxO-ToolBox-vsc",
-  "displayName": "WxO ToolBox",
+  "displayName": "WxO ToolBox(v2)",
   "description": "IBM Watsonx Orchestrate (WxO) ToolBox for VS Code. Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, and connections. Create tools, validate configs, and migrate between environments via orchestrate CLI. Formerly branded as WxO Toolkit.",
   "publisher": "markusvankempen",
   "author": {
