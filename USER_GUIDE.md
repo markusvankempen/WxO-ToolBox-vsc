@@ -2,7 +2,7 @@
 
 **VS Code Extension** (WxO-ToolBox-vsc) · IBM Watsonx Orchestrate
 
-*Author: Markus van Kempen · 28 Feb 2026*
+*Author: Markus van Kempen · 02 Mar 2026*
 
 Export, import, compare, replicate, and manage Watson Orchestrate (WxO) agents, tools, flows, and connections directly from VS Code.
 
