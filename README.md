@@ -1,12 +1,22 @@
 # WxO ToolBox — VS Code Extension (WxO-ToolBox-vsc)
 
-**IBM Watsonx Orchestrate**
+**IBM Watsonx Orchestrate** · v2.0.2
 
-*Author: Markus van Kempen · 02 Mar 2026*
+*Author: Markus van Kempen · 06 Mar 2026*
+
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/markusvankempen.WxO-ToolBox-vsc?style=flat&label=VS%20Marketplace&logo=visualstudiocode&logoColor=white&color=0062FF)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.WxO-ToolBox-vsc)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/markusvankempen.WxO-ToolBox-vsc?style=flat&label=Installs&color=0062FF)](https://marketplace.visualstudio.com/items?itemName=markusvankempen.WxO-ToolBox-vsc)
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.85+-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](https://code.visualstudio.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Platform](https://img.shields.io/badge/Platform-macOS-lightgrey?style=flat&logo=apple&logoColor=white)](https://www.apple.com/macos/)
+[![IBM Watsonx](https://img.shields.io/badge/IBM%20Watsonx-Orchestrate-0062FF?style=flat&logo=ibm&logoColor=white)](https://www.ibm.com/products/watsonx-orchestrate)
+[![License](https://img.shields.io/badge/License-Apache--2.0-green?style=flat)](LICENSE)
+
 
 **Repository:** [github.com/markusvankempen/WxO-ToolBox-vsc](https://github.com/markusvankempen/WxO-ToolBox-vsc)
 
-Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, and connections via the orchestrate CLI from VS Code. Uses the [**WxO-Importer-Export-Comparer-Validator**](https://github.com/markusvankempen/WxO-Importer-Export-Comparer-Validator) CLI scripts (wxo-toolkit-cli) bundled with the extension. Standalone extension (independent of wxo-builder).
+Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, and connections via the orchestrate CLI from VS Code. Uses the [**WxO-ToolBox-cli)*](https://github.com/markusvankempen/WxO-ToolBox-cli) CLI scripts (wxo-toolkit-cli) bundled with the extension. Standalone extension (independent of wxo-builder).
 
 ## Features
 
@@ -14,6 +24,9 @@ Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, 
 - **Search & Filter** — Search Resources (Quick Pick across all resources); Filter tree by name; Clear Filter when active
 - **Create Agent / Flow / Connection / Tool** — Form-based creation with YAML/JSON editor; Connection form supports API Key, Bearer, Basic Auth, OAuth flows
 - **Edit forms** — Edit opens pre-filled forms (not raw JSON) for agents, flows, connections, and tools; changes sync to YAML/JSON; save pushes via orchestrate CLI
+- **Agent form** — Full agent editor: display_name, kind, model, instructions, temperature, max_tokens, context_access_enabled, hide_reasoning, restrictions, style, welcome_content, chat_with_docs, **starter_prompts** (3 default prompts pre-filled; add/remove cards), tools & plugins drag-and-drop; YAML editor tab with **Open in VS Code** button
+- **Auto-reconnect** — Last-used environment is persisted across VS Code restarts and silently re-activated on startup; session is also refreshed before the environment picker opens to handle CLI timeouts
+- **Duplicate panel prevention** — Re-opening an already-open tool or agent edit form reveals and refreshes the existing panel instead of creating a duplicate
 - **Main Panel** — Export, Import, Compare, Replicate, Systems, **Observability**, Secrets, Dependencies, Help
 - **Object picker** — Export/Import/Replicate: pick specific agents, tools, or connections by name (checkbox list from env)
 - **Latest Report links** — Each tab shows a link to the most recent report with Refresh button
@@ -28,9 +41,13 @@ Export, import, compare, and replicate Watson Orchestrate agents, tools, flows, 
 |----------------|-------------------|-----------|
 | ![WxO Toolkit Panel](resources/wxo-toolkit-Panel.png) | ![Create Connection](resources/wxo-tookkit-CreateConnection.png) | ![Edit Tool](resources/wxo-toolkit-EditTool.png) |
 
-| Export | Export Report | Compare | Delete |
-|--------|---------------|---------|--------|
-| ![Export Panel](resources/wxo-toolkit-ExportPanel.png) | ![Export Report](resources/wxo-toolkit-ExportReport.png) | ![System Compare](resources/wxo-toolkit-SystemCompareReport.png) | ![Delete Multiple](resources/wxp-toolkit-DeleteMultipleTools.png) |
+| Export | Export Report | System Compare |
+|--------|---------------|---------|
+| ![Export Panel](resources/wxo-toolkit-ExportPanel.png) | ![Export Report](resources/wxo-toolkit-ExportReport.png) | ![System Compare](resources/wxo-toolkit-SystemCompareReport.png) |
+
+| Delete Multiple | Drag & Drop Tools | Observability |
+|--------|---------------|---------|
+| ![Delete Multiple](resources/wxp-toolkit-DeleteMultipleTools.png) | ![Drag and Drop](resources/wox-toolbox-DragAndDropToolsToAgents.png) | ![Observability Panel](resources/wxo-toolbox-observability.png) |
 
 ## Usage
 
@@ -66,16 +83,16 @@ Then in VS Code: **Run and Debug** → **Run Extension** (F5).
 
 *When developing within the watson-orchestrate-builder monorepo, use `watsonx-orchestrate-devkit/packages/wxo-toolkit/vscode-extension` as the working directory.*
 
-## Package for publishing
+## Package and Install
 
 ```bash
-cd WxO-ToolBox-vsc   # or watsonx-orchestrate-devkit/packages/wxo-toolkit/vscode-extension
+cd WxO-ToolBox-vsc
 npm run package
 ```
 
-Produces `WxO-ToolBox-vsc-1.2.4.vsix` (version from package.json). Install via **Extensions** → "..." → **Install from VSIX**.
+Produces `WxO-ToolBox-vsc-2.0.2.vsix` (version from package.json). Install via **Extensions** → "..." → **Install from VSIX**.
 
-See `PUBLISHING.md` for publishing to VS Code Marketplace and Open VSX.
+> **Note:** This extension has primarily been tested on **macOS**.
 
 ### Files included in the VSIX
 

@@ -2,6 +2,23 @@
 
 All notable changes to the WxO ToolBox VS Code extension ([WxO-ToolBox-vsc](https://github.com/markusvankempen/WxO-ToolBox-vsc)).
 
+## [2.0.2] - 2026-03-06
+
+### Added
+
+- **Starter Prompts on agent form** — New "Starter Prompts" fieldset on Create Agent and Edit Agent forms. Three default prompts are pre-filled (`What can you do for me?`, `Formalize Message`, `Summarize Meeting Notes`). Cards can be added, removed, and reordered. Each card has: ID, Title, Subtitle, Prompt text, and State (active/inactive). Syncs bidirectionally with the YAML editor tab.
+- **Agent form completeness** — Edit/Create Agent forms now expose all configurable fields: `display_name`, `context_access_enabled`, `hide_reasoning`, `style`, `restrictions`, `welcome_content` (`welcome_message` + `description`), and `chat_with_docs` (`enabled` + `supports_full_document`). All fields are pre-populated from the loaded agent YAML when editing.
+- **Open in VS Code button** — YAML Editor tab on agent/flow/connection forms now has a `📄 Open in VS Code` button that saves the current YAML to `WxO/Edits/{name}/` and opens it in a native VS Code editor tab for full language support.
+- **Auto-reconnect** — The last-used environment is persisted to workspace state (`wxo.lastActiveEnv`) and silently re-activated on VS Code startup. The environment picker also silently refreshes the current session before displaying the list, handling CLI session timeouts without user intervention. On startup failure a non-intrusive warning notification is shown.
+- **Duplicate panel prevention** — Re-opening an already-open tool edit form reveals and refreshes the existing panel instead of opening a new duplicate webview.
+
+### Fixed
+
+- **JavaScript syntax errors in agent form** — Multiple regex literals inside the HTML template (`/\n/g`, `/\s*/`, `/\w+/` etc.) were rendered with literal newlines/stripped backslashes, causing `SyntaxError: Invalid regular expression` in the webview. All template-embedded JS regex escapes are now correctly doubled (`\\n`, `\\s`, `\\w`).
+- **Missing `_connectionToYaml` function declaration** — A TypeScript function declaration was accidentally stripped, causing a compile error that prevented all recent changes from being bundled into `dist/extension.js`.
+
+---
+
 ## [1.2.4] - 2026-02-27
 
 ### Added

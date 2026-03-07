@@ -1,8 +1,8 @@
 # WxO ToolBox — User Guide
 
-**VS Code Extension** (WxO-ToolBox-vsc) · IBM Watsonx Orchestrate
+**VS Code Extension** (WxO-ToolBox-vsc) · IBM Watsonx Orchestrate · v2.0.2
 
-*Author: Markus van Kempen · 02 Mar 2026*
+*Author: Markus van Kempen · 06 Mar 2026*
 
 Export, import, compare, replicate, and manage Watson Orchestrate (WxO) agents, tools, flows, and connections directly from VS Code.
 
@@ -77,6 +77,23 @@ See [SETUP.md](SETUP.md) for flow diagrams and a detailed setup guide.
 
 4. **Browse resources** — Expand Agents, Tools, Flows, or Connections in the Activity Bar to see your resources. Use the inline buttons for quick actions.
 
+### Getting Started Flow
+
+```mermaid
+flowchart TD
+    A[Install WxO ToolBox Extension] --> B[Open WxO ToolBox\nin Activity Bar]
+    B --> C[Open Panel → Systems tab]
+    C --> D[Add Environment\nName · URL · API Key]
+    D --> E[Select Environment]
+    E --> F{What do you want to do?}
+    F -->|Browse agents / tools| G[Activity Bar tree\nExpand categories]
+    F -->|Backup resources| H[Main Panel\nExport tab]
+    F -->|Push to another env| I[Main Panel\nImport tab]
+    F -->|Sync environments| J[Main Panel\nReplicate tab]
+    F -->|Spot differences| K[Main Panel\nCompare tab]
+    F -->|Create or modify| L[Inline + and ✏️ buttons\nForm editor]
+```
+
 ---
 
 ## Activity Bar View
@@ -134,6 +151,8 @@ Each resource (agent, tool, flow, connection) has inline action buttons:
 
 ![Delete Multiple Tools](resources/wxp-toolkit-DeleteMultipleTools.png)
 
+![Drag and Drop Tools to Agents](resources/wox-toolbox-DragAndDropToolsToAgents.png)
+
 ### Copy options
 
 When you **Copy** a resource:
@@ -142,6 +161,26 @@ When you **Copy** a resource:
 2. **Include dependencies** (agents only) — With or without bundled tools
 3. **If exists** — Overwrite, skip, or use new name (`_copy` suffix)
 4. **Confirm** — Confirm to run the copy in the terminal
+
+### Resource Action Decision Flow
+
+```mermaid
+flowchart TD
+    S[Select a Resource in the tree] --> Q{What do you need?}
+    Q -->|Inspect definition| ViewJSON[📄 View JSON]
+    Q -->|Archive / backup| Export[↑ Export to local file]
+    Q -->|Push to another env| Copy[📋 Copy to Environment]
+    Q -->|Spot config differences| Cmp[⇄ Compare with env]
+    Q -->|Change fields| Edit[✏️ Edit in form]
+    Q -->|Remove| Delete[🗑️ Delete with confirmation]
+
+    Copy --> T{Resource already\nexists in target?}
+    T -->|Overwrite| OW[Replace existing]
+    T -->|Skip| SK[Leave unchanged]
+    T -->|New name| RN[Add _copy suffix]
+
+    Edit --> Save[Save → orchestrate CLI push]
+```
 
 ---
 
@@ -172,6 +211,29 @@ Push from a local export folder into a target environment.
 - **If exists** — Override or skip existing resources
 - **Run Import** — Executes `import_to_wxo.sh` in a new terminal
 - **Latest import report** — Link to open the most recent import report; **Refresh** to rescan
+
+### Export → Import / Replicate Pipeline
+
+```mermaid
+flowchart LR
+    subgraph SRC["Source Environment (e.g. TZ1)"]
+        A[Agents · Tools · Flows · Connections]
+    end
+    subgraph LOCAL["Local Storage (WxO/)"]
+        B["WxO/Exports/\n.zip / .yml files"]
+        C["WxO/Compare/\ndiff reports"]
+        D["WxO/Replicate/\nstaging folder"]
+    end
+    subgraph TGT["Target Environment (e.g. TZ2)"]
+        E[Imported Resources]
+    end
+
+    A -->|"↑ Export tab"| B
+    B -->|"↓ Import tab"| E
+    A -->|"⇄ Compare tab"| C
+    A -->|"⇉ Replicate tab"| D
+    D -->|"Import from Replicate folder"| E
+```
 
 ### ⇄ Compare
 
@@ -214,6 +276,9 @@ Manage Watson Orchestrate environments registered with the orchestrate CLI.
 - **Copy to .env** — Write stored credentials to workspace `.env`
 
 ### 📊 Observability
+
+![Observability Panel](resources/wxo-toolbox-observability.png)
+![Visualize Trace](resources/wxo-toolbox-visualizeTrace.png)
 
 Search and export traces from Watson Orchestrate (ADK 2.5.0+). Requires watsonx Orchestrate SaaS or Developer Edition with `--with-ibm-telemetry`.
 
@@ -263,6 +328,9 @@ Configure the extension in **File → Preferences → Settings** (search for "Wx
 
 - Click **Select Environment** in the Activity Bar
 - Ensure the orchestrate CLI is installed and `orchestrate env list` shows your environments
+- The extension automatically re-activates the last-used environment on startup and before opening the environment picker. If auto-activation fails (e.g. the session has timed out and no API key is stored), a warning notification is shown — use **Select Environment** to reconnect.
+- To enable fully automatic reconnection, store your API key via **Systems → Add Environment** (or the API key prompt). The key is saved in VS Code SecretStorage and used for silent re-activation.
+- If your `.env` uses `WO_<ENV>_API_KEY` naming instead of `WXO_API_KEY_<ENV>`, add a matching `WXO_API_KEY_<ENV>=...` entry or store the key through the extension UI.
 
 ### Export/Import commands fail
 
@@ -297,13 +365,36 @@ Configure the extension in **File → Preferences → Settings** (search for "Wx
 
 ### Create Tool / Agent / Flow / Connection (Activity Bar)
 
-- **Create Tool** — Python or OpenAPI tools via form. Output to `WxO/Exports/{env}/{datetime}/tools/{name}`.
+- **Create Tool** — Python or OpenAPI tools via form. Output to `WxO/Exports/{env}/{datetime}/tools/{name}`. Re-opening an already-open tool edit form reveals and refreshes the existing panel instead of opening a duplicate.
 - **Create Agent / Flow / Connection** — Inline Create buttons; form with YAML/JSON editor; Save imports via orchestrate CLI.
 
 ![Create Connection](resources/wxo-tookkit-CreateConnection.png)
 
 - **Connection form** — Supports API Key, Bearer Token, Basic Auth, OAuth flows; integrates with `orchestrate connections set-credentials` for live connections.
 - **Edit** — Opens form (not raw JSON) for agents, flows, connections, tools, plugins. Tools/plugins export to `WxO/Edits/{name}/` for editing.
+
+### Agent form fields
+
+The Create Agent and Edit Agent forms include all configurable fields:
+
+| Field | Description |
+|-------|-------------|
+| Name / Display Name | Identifier (snake_case) and human-readable label |
+| Description | Short description shown in the UI |
+| Kind | `native`, `external`, or `assistant` |
+| LLM / Model | e.g. `ibm/granite-3-8b-instruct` |
+| Style / Restrictions | UI style and edit restrictions |
+| Temperature / Max Tokens | LLM sampling parameters |
+| Context access enabled | Allow agent to read conversation context variables |
+| Hide reasoning | Suppress chain-of-thought in responses |
+| Instructions | System prompt (multi-line) |
+| Welcome Content | `welcome_message` and `description` shown on the chat welcome screen |
+| Chat With Docs | Enable document chat; `supports_full_document` toggle |
+| **Starter Prompts** | Quick-start prompt cards shown on the welcome panel. Three default prompts are pre-filled; add more with **+ Add Starter Prompt** or remove individual cards. Each card has: ID, Title, Subtitle, Prompt text, and State (active/inactive). |
+| Tools | Drag-and-drop assigned / available tools (load from environment) |
+| Plugins | Pre/post-invoke plugin drag-and-drop |
+
+The **YAML Editor** tab stays in sync with the form. Click **📄 Open in VS Code** to open the current YAML in a native VS Code editor tab.
 
 ### WxO Project Dir context menus
 
